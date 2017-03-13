@@ -9,7 +9,7 @@ function pullCharacter(realm, name) {
   console.log(url);
   return axios.get(url)
     .then(function (charData) {
-      console.log(charData.data)
+      return charData.data
     })
 }
 

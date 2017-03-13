@@ -29,9 +29,6 @@ var GetCharContainer = React.createClass({
   },
   handleSubmitChar: function (e) {
     e.preventDefault();
-    console.log(this.state.charRealm);
-    console.log(this.state.charName);
-    // pullCharacter(this.state.charRealm, this.state.charName);
     this.context.router.push('/character/' + this.state.charRealm + '/' + this.state.charName);
   },
   render: function () {
