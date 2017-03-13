@@ -4,6 +4,9 @@ var GetChar = require('../components/GetChar');
 var pullCharacter = require('../helpers/battlenet').pullCharacter;
 
 var GetCharContainer = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
   getDefaultProps: function () {
     return {
     }
@@ -24,10 +27,12 @@ var GetCharContainer = React.createClass({
       charRealm: e.target.value
     })
   },
-  handleSubmitChar: function () {
+  handleSubmitChar: function (e) {
+    e.preventDefault();
     console.log(this.state.charRealm);
     console.log(this.state.charName);
-    pullCharacter(this.state.charRealm, this.state.charName);
+    // pullCharacter(this.state.charRealm, this.state.charName);
+    this.context.router.push('/character/' + this.state.charRealm + '/' + this.state.charName);
   },
   render: function () {
     return (
