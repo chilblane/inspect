@@ -15,8 +15,9 @@ function CharacterUI(props) {
     <div>
       <img
         src={ArmoryImg(props.charData.thumbnail)}
-        alt="{props.charData.name} - {props.charData.realm}" />
+        alt={props.charData.name} />
       <h1>{props.charData.name} @ {props.charData.realm}</h1>
+      <p>{props.charData.level} {props.charData.race} {props.charData.class}</p>
       <p>
         <a
           href={ArmoryLink(props.realm, props.name)}
