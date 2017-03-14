@@ -13613,12 +13613,7 @@ var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var browserHistory = ReactRouter.browserHistory;
 var IndexRoute = ReactRouter.IndexRoute;
-var useRouterHistory = ReactRouter.useRouterHistory;
-var createHistory = history.createHistory;
-
-var appHistory = useRouterHistory(createHistory)({
-    basename: '/inspect'
-});
+var browserHistory = history.createBrowserHistory;
 
 var Main = __webpack_require__(153);
 var HomeContainer = __webpack_require__(152);
@@ -13626,7 +13621,7 @@ var CharacterPageContainer = __webpack_require__(151);
 
 var routes = React.createElement(
     Router,
-    { history: appHistory },
+    { history: browserHistory },
     React.createElement(
         Route,
         { path: "/", component: Main },
