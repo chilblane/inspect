@@ -13591,13 +13591,22 @@ function CharacterUI(props) {
     null,
     React.createElement("img", {
       src: ArmoryImg(props.charData.thumbnail),
-      alt: "{props.charData.name} - {props.charData.realm}" }),
+      alt: props.charData.name }),
     React.createElement(
       "h1",
       null,
       props.charData.name,
       " @ ",
       props.charData.realm
+    ),
+    React.createElement(
+      "p",
+      null,
+      props.charData.level,
+      " ",
+      props.charData.race,
+      " ",
+      props.charData.class
     ),
     React.createElement(
       "p",
