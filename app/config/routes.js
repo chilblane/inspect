@@ -1,16 +1,24 @@
 var React = require("react");
 var ReactRouter = require("react-router");
+var history = require("history");
+
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
+var browserHistory = ReactRouter.browserHistory;
 var IndexRoute = ReactRouter.IndexRoute;
-var useBasename = require("history").useBasename;
+var useRouterHistory = ReactRouter.useRouterHistory;
+var createHistory = history.createHistory;
+
+var appHistory = useRouterHistory(createHistory)({
+  basename: '/inspect'
+});
 
 var Main = require("../containers/Main");
 var HomeContainer = require("../containers/HomeContainer");
 var CharacterPageContainer = require("../containers/CharacterPageContainer");
 
 var routes = (
-    <Router history={ useBasename(() => browserHistory)({ basename: '/inspect' }) }>
+    <Router history={appHistory}>
         <Route path="/" component={Main}>
             <IndexRoute component={HomeContainer} />
             <Route path="character/:realm/:name" component={CharacterPageContainer} />
