@@ -36,24 +36,37 @@ function CharacterUI(props) {
 }
 
 function CharacterPage(props) {
-  return (
-    <div className="container-fluid mt-5">
-      {
-        props.isLoading === true
-          ? <h1>Loading</h1>
-          : <CharacterUI
-              realm={props.realm}
-              name={props.name}
-              charData={props.charData} />
-      }
-    </div>
-  )
+  console.log(props);
+  if (props.isLoading === true) {
+    return (
+      <div className="container-fluid mt-5">
+        <h1>Loading...</h1>
+      </div>
+    )
+  } else if (props.isError === true) {
+    return (
+      <div className="container-fluid mt-5">
+        <h1>Error!</h1>
+        <p>{props.charData.reason}</p>
+      </div>
+    )
+  } else {
+    return (
+      <div className="container-fluid mt-5">
+        <CharacterUI
+          realm={props.realm}
+          name={props.name}
+          charData={props.charData} />
+      </div>
+    )
+  }
 }
 
 CharacterPage.propTypes = {
   realm: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  isError: PropTypes.bool.isRequired,
   charData: PropTypes.object.isRequired
 }
 

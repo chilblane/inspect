@@ -10,9 +10,14 @@ function pullCharacter(realm, name) {
       realm: realm,
       name: name
     }
-  ).then(function(res) {
-    console.log(res.data);
-    return res.data
+  )
+  .then(function(response) {
+    console.log(response.data);
+    return response.data;
+  })
+  .catch(function(err) {
+    console.warn(err.response.data);
+    return err.response.data;
   });
 }
 

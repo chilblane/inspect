@@ -6,16 +6,27 @@ var CharacterPageContainer = React.createClass({
   getInitialState: function () {
     return {
       isLoading: true,
+      isError: false,
       charData: {}
     }
   },
   makeRequest: function (realm, name) {
     pullCharacter(realm, name)
       .then(function (charData) {
-        this.setState({
-          isLoading: false,
-          charData: charData
-        });
+        console.log(charData);
+        if (charData.status === "nok") {
+          this.setState({
+            isError: true,
+            isLoading: false,
+            charData: charData
+          })
+        } else {
+          this.setState({
+            isError: false,
+            isLoading: false,
+            charData: charData
+          })
+        }
       }.bind(this));
   },
   componentDidMount: function () {
@@ -30,6 +41,7 @@ var CharacterPageContainer = React.createClass({
         realm={this.props.routeParams.realm}
         name={this.props.routeParams.name}
         isLoading={this.state.isLoading}
+        isError={this.state.isError}
         charData={this.state.charData} />
     )
   }
