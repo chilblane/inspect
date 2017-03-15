@@ -4,14 +4,15 @@ var blizzard = require('blizzard.js').initialize({ apikey: _apikey });
 //TODO: locale support
 function pullCharacter(realm, name) {
   return blizzard.wow.character(
-    ['profile'],
+    ['profile', 'talents'],
     {
       origin: 'us',
       realm: realm,
       name: name
     }
-  ).then(function(charData) {
-    return charData.data
+  ).then(function(res) {
+    console.log(res.data);
+    return res.data
   });
 }
 

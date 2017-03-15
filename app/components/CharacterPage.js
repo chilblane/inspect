@@ -1,5 +1,6 @@
 var React = require("react");
 var PropTypes = React.PropTypes;
+var utils = require("../helpers/utils");
 
 function ArmoryImg(thumbnail) {
   return "http://render-us.worldofwarcraft.com/character/" + thumbnail;
@@ -10,14 +11,19 @@ function ArmoryLink(realm, name) {
 }
 
 function CharacterUI(props) {
-  console.log(props.charData);
+  var data = props.charData;
   return (
     <div>
       <img
-        src={ArmoryImg(props.charData.thumbnail)}
-        alt={props.charData.name} />
-      <h1>{props.charData.name} @ {props.charData.realm}</h1>
-      <p>{props.charData.level} {props.charData.race} {props.charData.class}</p>
+        src={ArmoryImg(data.thumbnail)}
+        alt={data.name} />
+      <h1>{data.name} @ {data.realm} ({utils.parseFaction(data.faction)})</h1>
+      <p>
+        {data.level}&nbsp;
+        {utils.parseRace(data.race)}&nbsp;
+        {utils.parseSpec(data.talents)}&nbsp;
+        {utils.parseClass(data.class)}
+      </p>
       <p>
         <a
           href={ArmoryLink(props.realm, props.name)}
