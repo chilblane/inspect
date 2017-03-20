@@ -24,7 +24,7 @@ var GetCharContainer = React.createClass({
   },
   createRealmList: function (realmData) {
     console.log(realmData);
-    that.setState({
+    this.setState({
       realmList: realmData
     });
   },
