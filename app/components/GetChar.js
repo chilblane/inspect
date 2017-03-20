@@ -11,14 +11,25 @@ function Button (props) {
   )
 }
 
+function GenerateRealmOptions (props) {
+  return (
+    {
+      props.realmList.map(function(realm) {
+        return <option value={realm.slug}>{realm.name}</option>;
+      })
+    }
+  )
+}
+
+
 function RealmField (props) {
   return (
     <select
       className='form-control mr-sm-2'
       onChange={props.onUpdateRealm}
       value={props.charRealm}>
-        <option value="kiljaeden">Kil'Jaeden</option>
-        <option value="emeralddream">Emerald Dream</option>
+        <option value="" disabled>Realm</option>
+        <GenerateRealmOptions />
     </select>
   )
 }
@@ -52,6 +63,7 @@ function GetChar (props) {
 }
 
 GetChar.propTypes = {
+  realmList: PropTypes.array.isRequired,
   onUpdateName: PropTypes.func.isRequired,
   onUpdateRealm: PropTypes.func.isRequired,
   onSubmitChar: PropTypes.func.isRequired,

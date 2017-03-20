@@ -1,7 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var GetChar = require('../components/GetChar');
-var pullCharacter = require('../helpers/battlenet').pullCharacter;
+var pullRealms = require('../helpers/battlenet').pullRealms;
 
 var GetCharContainer = React.createClass({
   contextTypes: {
@@ -14,8 +14,19 @@ var GetCharContainer = React.createClass({
   getInitialState: function () {
     return {
       charName: 'dnasis', //TODO: update with blank
-      charRealm: 'kiljaeden' //TODO: update with aegwynn or whatever
+      charRealm: '', //TODO: update with aegwynn or whatever
+      realmList: []
     }
+  },
+  componentDidMount: function () {
+    pullRealms('us')
+      .then(this.createRealmList);
+  },
+  createRealmList: function (realmData) {
+    console.log(realmData);
+    that.setState({
+      realmList: realmData
+    });
   },
   handleUpdateName: function (e) {
     this.setState({
@@ -34,6 +45,7 @@ var GetCharContainer = React.createClass({
   render: function () {
     return (
       <GetChar
+        realmList={this.state.realmList}
         onUpdateName={this.handleUpdateName}
         onUpdateRealm={this.handleUpdateRealm}
         onSubmitChar={this.handleSubmitChar}
