@@ -13,7 +13,7 @@ var CharacterPageContainer = React.createClass({
   makeRequest: function (realm, name) {
     pullCharacter(realm, name)
       .then(function (charData) {
-        console.log(charData);
+        // console.log(charData);
         if (charData.status === "nok") {
           this.setState({
             isError: true,

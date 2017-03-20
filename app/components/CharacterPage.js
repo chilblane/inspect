@@ -36,7 +36,7 @@ function CharacterUI(props) {
 }
 
 function CharacterPage(props) {
-  console.log(props);
+  // console.log(props);
   if (props.isLoading === true) {
     return (
       <div className="container-fluid mt-5">
