@@ -13,7 +13,7 @@ var GetCharContainer = React.createClass({
   },
   getInitialState: function () {
     return {
-      charName: 'dnasis', //TODO: update with blank
+      charName: '', //TODO: update with blank
       charRealm: '', //TODO: update with aegwynn or whatever
       realmList: []
     }
@@ -23,7 +23,6 @@ var GetCharContainer = React.createClass({
       .then(this.createRealmList);
   },
   createRealmList: function (realmData) {
-    console.log(realmData);
     this.setState({
       realmList: realmData
     });

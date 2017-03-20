@@ -13,7 +13,7 @@ function Button (props) {
 
 function generateRealmOptions (props) {
   return props.realmList.map(function(realm) {
-    return <option value={realm.slug}>{realm.name}</option>;
+    return <option key={realm.slug} value={realm.slug}>{realm.name}</option>;
   });
 }
 
