@@ -3,9 +3,8 @@ var PropTypes = React.PropTypes;
 
 function Button (props) {
   return (
-    <button type='button'
-      className='btn btn-success'
-      onClick={props.onSubmitChar}>
+    <button type='submit'
+      className='btn btn-success'>
         {props.children}
     </button>
   )
@@ -43,7 +42,8 @@ function NameField (props) {
 
 function GetChar (props) {
   return (
-    <form className="form-inline">
+    <form className="form-inline"
+    onClick={props.onSubmitChar}>
       <RealmField
         onUpdateRealm={props.onUpdateRealm}
         realmList={props.realmList}
@@ -51,8 +51,7 @@ function GetChar (props) {
       <NameField
         onUpdateName={props.onUpdateName}
         charName={props.charName} />
-      <Button
-        onSubmitChar={props.onSubmitChar}>
+      <Button>
           Inspect
       </Button>
     </form>
