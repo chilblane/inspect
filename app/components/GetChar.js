@@ -11,14 +11,10 @@ function Button (props) {
   )
 }
 
-function GenerateRealmOptions (props) {
-  return (
-    {
-      props.realmList.map(function(realm) {
-        return <option value={realm.slug}>{realm.name}</option>;
-      })
-    }
-  )
+function generateRealmOptions (props) {
+  return props.realmList.map(function(realm) {
+    return <option value={realm.slug}>{realm.name}</option>;
+  });
 }
 
 
@@ -29,7 +25,7 @@ function RealmField (props) {
       onChange={props.onUpdateRealm}
       value={props.charRealm}>
         <option value="" disabled>Realm</option>
-        <GenerateRealmOptions />
+        {generateRealmOptions(props)}
     </select>
   )
 }
@@ -50,6 +46,7 @@ function GetChar (props) {
     <form className="form-inline">
       <RealmField
         onUpdateRealm={props.onUpdateRealm}
+        realmList={props.realmList}
         charRealm={props.charRealm} />
       <NameField
         onUpdateName={props.onUpdateName}
