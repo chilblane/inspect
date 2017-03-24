@@ -1,6 +1,7 @@
 var React = require("react");
 var PropTypes = React.PropTypes;
 var utils = require("../helpers/utils");
+var GearList = require("../components/GearList");
 
 function ArmoryImg(thumbnail) {
   return "http://render-us.worldofwarcraft.com/character/" + thumbnail;
@@ -8,6 +9,11 @@ function ArmoryImg(thumbnail) {
 
 function ArmoryLink(realm, name) {
   return "http://us.battle.net/wow/en/character/" + realm + "/" + name + "/advanced";
+}
+
+function ArmoryDate(timestamp) {
+  var lastModified = new Date(timestamp);
+  return lastModified.toLocaleString();
 }
 
 function CharacterUI(props) {
@@ -24,13 +30,17 @@ function CharacterUI(props) {
         {utils.parseSpec(data.talents)}&nbsp;
         {utils.parseClass(data.class)}
       </p>
-      <p>
+      <p className="small">
+        Last updated: {ArmoryDate(data.lastModified)}<br/>
         <a
           href={ArmoryLink(props.realm, props.name)}
           target="_blank">
             Armory Link
         </a>
       </p>
+      <hr />
+      <GearList
+        charData={props.charData} />
     </div>
   )
 }

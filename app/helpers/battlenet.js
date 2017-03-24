@@ -21,7 +21,7 @@ function pullRealms(originValue) {
 //TODO: locale support
 function pullCharacter(realm, name) {
   return blizzard.wow.character(
-    ['profile', 'talents'],
+    ['profile', 'talents', 'items', 'stats'],
     {
       origin: 'us',
       realm: realm,
