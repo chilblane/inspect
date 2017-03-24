@@ -43,7 +43,7 @@ function NameField (props) {
 function GetChar (props) {
   return (
     <form className="form-inline"
-    onClick={props.onSubmitChar}>
+    onSubmit={props.onSubmitChar}>
       <RealmField
         onUpdateRealm={props.onUpdateRealm}
         realmList={props.realmList}
