@@ -1,6 +1,6 @@
 {
   "name": "inspect",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Online tool for checking a World of Warcraft character's information.",
   "main": "index.js",
   "scripts": {
