@@ -1,6 +1,46 @@
 var React = require("react");
 var PropTypes = React.PropTypes;
 
+function wowheadLink(item) {
+  var url = "//www.wowhead.com/item="+item.id
+  var bonusIds;
+  if (item.bonusLists.length > 0) {
+    bonusIds = "&bonus=" + item.bonusLists.join(':');
+    url += bonusIds;
+  }
+  return url;
+}
+
+function wowheadRel(item) {
+  var relParams = [];
+  var gems = [];
+  if (item.bonusLists.length > 0) {
+    relParams.push("bonus=" + item.bonusLists.join(":"));
+  }
+  if (item.tooltipParams.gem0) {
+    gems.push(item.tooltipParams.gem0);
+  }
+  if (item.tooltipParams.gem1) {
+    gems.push(item.tooltipParams.gem1);
+  }
+  if (item.tooltipParams.gem2) {
+    gems.push(item.tooltipParams.gem2);
+  }
+  if (gems.length > 0) {
+    relParams.push("gems=" + gems.join(":"));
+  }
+  if (item.tooltipParams.set) {
+    relParams.push("pcs=" + item.tooltipParams.set.join(":"));
+  }
+  if (item.tooltipParams.enchant) {
+    relParams.push("ench=" + item.tooltipParams.enchant);
+  }
+  if (item.tooltipParams.timewalkerLevel) {
+    relParams.push("lvl=" + item.tooltipParams.timewalkerLevel);
+  }
+  return relParams.join("&amp;");
+}
+
 function GearListItem(item) {
   return (
     <div>
@@ -13,7 +53,8 @@ function GearListItem(item) {
         <br/>
           {
             item
-            ? <span>{item.name}</span>
+            ? <a href={wowheadLink(item)} target="_blank"
+               rel={wowheadRel(item)}>[{item.name}]</a>
             : <span className="text-muted">Empty</span>
           }
       </p>
@@ -24,8 +65,8 @@ function GearListItem(item) {
 function GearList(props) {
   var gear = props.charData.items;
   var stats = props.charData.stats;
-  console.log(gear);
-  console.log(stats);
+  // console.log(gear);
+  // console.log(stats);
   return (
     <div>
       <h2>Equipment &amp; Stats</h2>
