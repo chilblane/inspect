@@ -49,20 +49,20 @@ function CharacterPage(props) {
   // console.log(props);
   if (props.isLoading === true) {
     return (
-      <div className="container-fluid mt-5">
+      <div className="container-fluid py-5 bg-inverse text-white">
         <h1>Loading...</h1>
       </div>
     )
   } else if (props.isError === true) {
     return (
-      <div className="container-fluid mt-5">
+      <div className="container-fluid py-5 bg-inverse text-white">
         <h1>Error!</h1>
         <p>{props.charData.reason}</p>
       </div>
     )
   } else {
     return (
-      <div className="container-fluid mt-5">
+      <div className="container-fluid py-5 bg-inverse text-white">
         <CharacterUI
           realm={props.realm}
           name={props.name}
