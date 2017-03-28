@@ -1,6 +1,9 @@
 var _apikey = "xpbmb2crkyz7t6njsxfpvzw7v7nyssyh";
 var blizzard = require('blizzard.js').initialize({ apikey: _apikey });
 
+
+//TODO: locale support
+
 function pullRealms(originValue) {
   return blizzard.wow.realms({origin: originValue})
   .then(function(response) {
@@ -18,7 +21,6 @@ function pullRealms(originValue) {
   });
 }
 
-//TODO: locale support
 function pullCharacter(realm, name) {
   return blizzard.wow.character(
     ['profile', 'talents', 'items', 'stats'],
@@ -38,7 +40,25 @@ function pullCharacter(realm, name) {
   });
 }
 
+function pullItem(id) {
+  return blizzard.wow.item(
+    {
+      id: id,
+      origin: 'us'
+    }
+  )
+  .then(function(response) {
+    // console.log(response.data);
+    return response.data;
+  })
+  .catch(function(err) {
+    console.warn(err.response.data);
+    return err.response.data;
+  });
+}
+
 module.exports = {
   pullCharacter: pullCharacter,
-  pullRealms: pullRealms
+  pullRealms: pullRealms,
+  pullItem: pullItem
 }

@@ -1,8 +1,12 @@
 var React = require("react");
 var PropTypes = React.PropTypes;
+var pullItem = require('../helpers/battlenet').pullItem;
 
-function wowheadLink(item) {
-  var url = "//www.wowhead.com/item="+item.id
+function wowheadLink(id) {
+  return "//www.wowhead.com/item="+id;
+}
+function wowheadGearLink(item) {
+  var url = wowheadLink(item.id);
   var bonusIds;
   if (item.bonusLists.length > 0) {
     bonusIds = "&bonus=" + item.bonusLists.join(':');
@@ -46,13 +50,51 @@ function wowheadIcon(icon) {
   return url;
 }
 
+function ProcessGems(props) {
+  var gems = [];
+  var currentItem = props.item.tooltipParams;
+  if (currentItem.gem0) {
+    gems.push(currentItem.gem0);
+  }
+  if (currentItem.gem1) {
+    gems.push(currentItem.gem1);
+  }
+  if (currentItem.gem2) {
+    gems.push(currentItem.gem2);
+  }
+  if (gems.length > 0) {
+    return (
+      <div>
+        {gems.forEach( function(gem) {
+          pullItem(gem)
+            .then(function(res) {
+              console.log(res);
+              return (
+                <a
+                  href={wowheadLink(gem)}
+                  target="_blank">
+                    <img
+                      src={wowheadIcon(gem.icon)}
+                      alt={gem.name}/>
+                </a>
+              )
+            });
+        })}
+      </div>
+    )
+  } else {
+    return null;
+  }
+}
+
 function GearListItem(item) {
   if (item) {
+    // console.log(item);
     return (
       <div className="media mb-1">
         <a
           className="d-flex mr-2"
-          href={wowheadLink(item)}
+          href={wowheadGearLink(item)}
           target="_blank"
           rel={wowheadRel(item)}>
             <img
@@ -62,14 +104,14 @@ function GearListItem(item) {
         <div className="media-body">
           <p>
             <a
-              href={wowheadLink(item)}
+              href={wowheadGearLink(item)}
               target="_blank"
               rel={wowheadRel(item)}>
                 [{item.name}]
             </a>
-            <br/>
-            <small>{item.itemLevel}</small>
           </p>
+          <ProcessGems item={item}/>
+          <p><small>{item.itemLevel}</small></p>
         </div>
       </div>
     )
@@ -83,7 +125,8 @@ function GearListItem(item) {
         <div className="media-body">
           <p>
             <span className="text-muted">Empty</span>
-            <br/>
+          </p>
+          <p>
             <small className="text-muted">0</small>
           </p>
         </div>
